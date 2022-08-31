@@ -390,13 +390,6 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -475,7 +468,7 @@
         })
 
 
-        function consultCustomers() {  // Consult / return customers from the database in JSON format
+        function consultCustomers() {  // Consult / return customers from the database in JSON format and render it to the table
             fetch("http://localhost/management-system-crud-app/api/consult.php", {
                 method: "GET",
                 headers: {
@@ -484,19 +477,26 @@
                 }
             }).then(response => response.json())
             .then(customers => {
-                console.log(customers);
+                addMultipleCustomersToTable(customers);
             });
         }
 
-        function addCustomerToTable(id, name, surname, email, telephone, details) { // Add new customer to the table (only render it, it does not add it to the database)
+        function addMultipleCustomersToTable(customers) {  // Add multiple customers to table
+            for (const customer of customers) {
+                addCustomerToTable(customer);
+            }
+        }
+
+
+        function addCustomerToTable(customer) { // Add new customer to the table (only render it, it does not add it to the database)
             $(document).ready(function () {
             $('#dataTable tbody').append(`
             <tr>
-                <td>${id}</td>
-                <td>${name} ${surname}</td>
-                <td>${email}</td>
-                <td>${telephone}</td>
-                <td>${details}</td>
+                <td>${customer.id}</td>
+                <td>${customer.name} ${customer.surname}</td>
+                <td>${customer.email}</td>
+                <td>${customer.telephone}</td>
+                <td>${customer.details}</td>
             </tr>`)
             })
         }
@@ -505,3 +505,4 @@
 </body>
 
 </html>
+
