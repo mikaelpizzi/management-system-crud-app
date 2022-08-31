@@ -1,21 +1,21 @@
 <?php
 
-// http://localhost/management-system-crud-app/api/delete.php?id=4
+// http://localhost/management-system-crud-app/api/consult.php
 
 $connection = new mysqli("localhost", "root", "", "system")
 or die("not connected".mysqli_connect_error());	 // Connect to the MySQL database
 
-$sql = "SELECT * FROM `clients`;";  // SQL SELECT statement to get our clients
+$sql = "SELECT * FROM `customers`;";  // SQL SELECT statement to get our customers
 
 $result = mysqli_query($connection, $sql); // Get the results of the SELECT statement and store it in $result
 
-$clients = array();
+$customers = array();
 
 while ($row = mysqli_fetch_array($result)) {  // Iterates every row of out database and push the data in a array
-	array_push($clients, $row);
+	array_push($customers, $row);
 }
 
-echo json_encode($clients); // Encode our clients to a JSON format
+echo json_encode($customers); // Encode our customers to a JSON format
 
 mysqli_free_result($result);  // Frees result memory
 mysqli_close($connection);  // Closes database connection
