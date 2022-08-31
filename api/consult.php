@@ -9,10 +9,13 @@ $sql = "SELECT * FROM `clients`;";  // SQL SELECT statement to get our clients
 
 $result = mysqli_query($connection, $sql); // Get the results of the SELECT statement and store it in $result
 
-while ($row = mysqli_fetch_array($result)) {  // Print rows of content that includes the selected columns
-    echo "{$row['name']} {$row['surname']} {$row['email']} {$row['telephone']} {$row['details']}";
-    echo '<br />';
+$clients = array();
+
+while ($row = mysqli_fetch_array($result)) {  // Iterates every row of out database and push the data in a array
+	array_push($clients, $row);
 }
+
+echo json_encode($clients); // Encode our clients to a JSON format
 
 mysqli_free_result($result);  // Frees result memory
 mysqli_close($connection);  // Closes database connection
