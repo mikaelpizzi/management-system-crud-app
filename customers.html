@@ -470,11 +470,25 @@
     <!-- Add customer to table scripts -->
     <script>
         $(document).ready(function () {
-            addCustomerToTable("3", "John", "Doe", "jonhdoe@example.com", "+(999)2235959999", "It's Jonh Doe!");
+            consultCustomers();
+            // addCustomerToTable("3", "John", "Doe", "jonhdoe@example.com", "+(999)2235959999", "It's Jonh Doe!");
         })
 
 
-        function addCustomerToTable(id, name, surname, email, telephone, details) {
+        function consultCustomers() {  // Consult / return customers from the database in JSON format
+            fetch("http://localhost/management-system-crud-app/api/consult.php", {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                }
+            }).then(response => response.json())
+            .then(customers => {
+                console.log(customers);
+            });
+        }
+
+        function addCustomerToTable(id, name, surname, email, telephone, details) { // Add new customer to the table (only render it, it does not add it to the database)
             $(document).ready(function () {
             $('#dataTable tbody').append(`
             <tr>
