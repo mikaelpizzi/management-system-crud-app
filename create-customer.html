@@ -364,42 +364,60 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Customer Management</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Customer Registration</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
+
+                            <form role="form" id="customerForm">
+
+                                <div class="row">
+                                    <div class="col-xs-3 col-md-3">
+                                        <label for="name"><span>Name:</span>
+                                            <input type="text" class="form-control" id="txtName" placeholder="Enter a name"
+                                                required />
+                                    </div>
+                                    <div class="col-xs-3 col-md-3">
+                                        <label for="surname"><span>Surname:</span>
+                                            <input type="text" class="form-control" id="txtSurname"
+                                                placeholder="Enter a surname" required />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3 col-md-3">
+                                        <label for="telephone"><span>Telephone:</span>
+                                            <input type="text" class="form-control" id="txtTelephone"
+                                                placeholder="Enter a phone number" required />
+                                    </div>
+                                    <div class="col-xs-3 col-md-3">
+                                        <label for="email"><span>Email:</span>
+                                            <input type="text" class="form-control" id="txtEmail"
+                                                placeholder="Enter a email" required />
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="comment">Details:</label>
+                                        <textarea class="form-control" rows="5" id="txtDetails" placeholder="Enter the details"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+
                             <a href="#" class="btn btn-primary btn-icon-split float-right">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-flag"></i>
                                 </span>
-                                <span class="text">Add Customer</span>
+                                <span class="text">Create Customer</span>
                             </a>
                             <br /> <br />
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Telephone</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Telephone</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+
                         </div>
                     </div>
 
@@ -484,32 +502,13 @@
                 }
             }).then(response => response.json())
             .then(customers => {
-                addMultipleCustomersToTable(customers);
             });
         }
 
-        function addMultipleCustomersToTable(customers) {  // Add multiple customers to table
-            for (const customer of customers) {
-                addCustomerToTable(customer);
-            }
-        }
-
-
-        function addCustomerToTable(customer) { // Add new customer to the table (only render it, it does not add it to the database)
-            $(document).ready(function () {
-            $('#dataTable tbody').append(`
-            <tr>
-                <td>${customer.id}</td>
-                <td>${customer.name} ${customer.surname}</td>
-                <td>${customer.email}</td>
-                <td>${customer.telephone}</td>
-                <td>${customer.details}</td>
-            </tr>`)
-            })
-        }
     </script>
 
 </body>
 
 </html>
+
 
