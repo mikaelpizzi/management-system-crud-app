@@ -1,7 +1,4 @@
 <?php
-
-// http://localhost/management-system-crud-app/api/delete.php?id=4
-
 $connection = new mysqli("localhost", "root", "", "system")
 or die("not connected".mysqli_connect_error());	 // Connect to the MySQL database
 

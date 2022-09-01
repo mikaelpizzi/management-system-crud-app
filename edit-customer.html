@@ -407,9 +407,6 @@
                                 </div>
                             </form>
 
-
-
-
                             <a href="#" class="btn btn-primary btn-icon-split float-right" id="btn-editCustomer">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-flag"></i>
@@ -491,8 +488,6 @@
             $('#btn-editCustomer').click(editCustomer);
             let id = window.location.href.split("id=")[1];
             consultCustomer(id);
-            // consultCustomers();
-            // addCustomerToTable("3", "John", "Doe", "jonhdoe@example.com", "+(999)2235959999", "It's Jonh Doe!");
         })
 
         function consultCustomer(id) {  // Consult / return customers from the database in JSON format and render it to the table
@@ -534,11 +529,6 @@
         })
             .then(response => alert("Customer was successfully updated"));
         }
-
-
-
     </script>
-
 </body>
-
 </html>

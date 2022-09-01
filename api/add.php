@@ -1,7 +1,4 @@
 <?php
-
-// http://localhost/management-system-crud-app/api/?name=Cristiano&surname=Ronaldo&email=cr7_asdfg@test.com&telephone=+(609)123123456&details=cr777777
-
 $connection = new mysqli("localhost", "root", "", "system")
 or die("not connected".mysqli_connect_error());	 // Connect to the MySQL database
 
@@ -21,6 +18,5 @@ if (isset($_GET['name'])){  // If no [name] is provided from client, do nothing
 	} else {
 		echo mysqli_error($connection);
 	}
-
 }
 ?>

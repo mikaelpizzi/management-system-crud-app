@@ -1,7 +1,4 @@
 <?php
-
-// http://localhost/management-system-crud-app/api/consult.php
-
 $connection = new mysqli("localhost", "root", "", "system")
 or die("not connected".mysqli_connect_error());	 // Connect to the MySQL database
 
@@ -19,5 +16,4 @@ echo json_encode($customers); // Encode our customers to a JSON format
 
 mysqli_free_result($result);  // Frees result memory
 mysqli_close($connection);  // Closes database connection
-
 ?>
