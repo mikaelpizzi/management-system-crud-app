@@ -364,7 +364,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Customer Registration</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Customer Edition</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -410,11 +410,11 @@
 
 
 
-                            <a href="#" class="btn btn-primary btn-icon-split float-right" id="btn-createCustomer">
+                            <a href="#" class="btn btn-primary btn-icon-split float-right" id="btn-editCustomer">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-flag"></i>
                                 </span>
-                                <span class="text">Create Customer</span>
+                                <span class="text">Edit Customer</span>
                             </a>
                             <br /> <br />
 
@@ -488,7 +488,7 @@
     <!-- Add customer to table scripts -->
     <script>
         $(document).ready(function () {
-            $('#btn-createCustomer').click(createCustomer);
+            $('#btn-editCustomer').click(editCustomer);
             let id = windows.location.href.split("id=")[1];
             consultCustomer(id);
             // consultCustomers();
@@ -516,22 +516,23 @@
             $('#txtDetails').val(customer.detail);
         }
 
-        function createCustomer() { // Send data submitted in the form to the table and hence to the database
-
+        function editCustomer() { // Send data submitted in the form to the table and hence to the database
+            
+        let id = windows.location.href.split("id=")[1];
         let name = $('#txtName').val();
         let surname = $('#txtSurname').val();
         let email = $('#txtEmail').val();
         let telephone = $('#txtTelephone').val();
         let details= $('#txtDetails').val();
 
-        fetch(`http://localhost/management-system-crud-app/api/add.php?name=${name}&surname=${surname}&email=${email}&telephone=${telephone}&details=${details}`, {
+        fetch(`http://localhost/management-system-crud-app/api/update.php?name=${name}&surname=${surname}&email=${email}&telephone=${telephone}&details=${details}&id=${id}`, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => alert("Successfully registered customer"));
+            .then(response => alert("Customer was successfully updated"));
         }
 
 
