@@ -511,7 +511,9 @@
             }).then(response => window.location.reload());
         }
 
-
+        function editCustomer(id) {
+            window.location.href(`edit-customer.html?id=${id}`);
+        }
 
 
         function addCustomerToTable(customer) { // Add new customer to the table (only render it, it does not add it to the database)s

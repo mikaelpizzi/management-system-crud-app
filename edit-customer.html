@@ -489,11 +489,32 @@
     <script>
         $(document).ready(function () {
             $('#btn-createCustomer').click(createCustomer);
-
+            let id = windows.location.href.split("id=")[1];
+            consultCustomer(id);
             // consultCustomers();
             // addCustomerToTable("3", "John", "Doe", "jonhdoe@example.com", "+(999)2235959999", "It's Jonh Doe!");
         })
 
+        function consultCustomer(id) {  // Consult / return customers from the database in JSON format and render it to the table
+            fetch(`http://localhost/management-system-crud-app/api/consultACustomer.php?id=${id}`, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                }
+            }).then(response => response.json())
+            .then(customers => {
+                loadForm(customers[0]);
+            });
+        }
+
+        function loadForm(customer) {  // Load customer data to the form to modify it
+            $('#txtName').val(customer.name);
+            $('#txtSurname').val(customer.surname);
+            $('#txtEmail').val(customer.email);
+            $('#txtTelephone').val(customer.telephone);
+            $('#txtDetails').val(customer.detail);
+        }
 
         function createCustomer() { // Send data submitted in the form to the table and hence to the database
 
@@ -512,6 +533,7 @@
         })
             .then(response => alert("Successfully registered customer"));
         }
+
 
 
     </script>
