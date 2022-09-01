@@ -272,8 +272,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -284,8 +283,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -296,8 +294,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -308,8 +305,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div>
@@ -364,60 +360,44 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Customer Edition</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Customer Management</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
-
-                            <form role="form" id="customerForm">
-
-                                <div class="row">
-                                    <div class="col-xs-3 col-md-3">
-                                        <label for="name"><span>Name:</span>
-                                            <input type="text" class="form-control" id="txtName" placeholder="Enter a name"
-                                                required />
-                                    </div>
-                                    <div class="col-xs-3 col-md-3">
-                                        <label for="surname"><span>Surname:</span>
-                                            <input type="text" class="form-control" id="txtSurname"
-                                                placeholder="Enter a surname" required />
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xs-3 col-md-3">
-                                        <label for="telephone"><span>Telephone:</span>
-                                            <input type="text" class="form-control" id="txtTelephone"
-                                                placeholder="Enter a phone number" required />
-                                    </div>
-                                    <div class="col-xs-3 col-md-3">
-                                        <label for="email"><span>Email:</span>
-                                            <input type="text" class="form-control" id="txtEmail"
-                                                placeholder="Enter a email" required />
-                                    </div>
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label for="comment">Details:</label>
-                                        <textarea class="form-control" rows="5" id="txtDetails" placeholder="Enter the details"></textarea>
-                                    </div>
-                                </div>
-                            </form>
-
-
-
-
-                            <a href="#" class="btn btn-primary btn-icon-split float-right" id="btn-editCustomer">
+                            <a href="create-customer.html" class="btn btn-primary btn-icon-split float-right">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-flag"></i>
                                 </span>
-                                <span class="text">Edit Customer</span>
+                                <span class="text">Add Customer</span>
                             </a>
                             <br /> <br />
-
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="customersTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Telephone</th>
+                                            <th>Details</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Telephone</th>
+                                            <th>Details</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -485,18 +465,22 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+    <!-- Functional scripts -->
+    <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.html5.min.js"></script>
+
     <!-- Add customer to table scripts -->
     <script>
         $(document).ready(function () {
-            $('#btn-editCustomer').click(editCustomer);
-            let id = window.location.href.split("id=")[1];
-            consultCustomer(id);
-            // consultCustomers();
-            // addCustomerToTable("3", "John", "Doe", "jonhdoe@example.com", "+(999)2235959999", "It's Jonh Doe!");
-        })
+            consultCustomers();
+        });
 
-        function consultCustomer(id) {  // Consult / return customers from the database in JSON format and render it to the table
-            fetch(`http://localhost/management-system-crud-app/api/consultACustomer.php?id=${id}`, {
+
+        function consultCustomers() {  // Consult / return customers from the database in JSON format and render it to the table
+            fetch("http://localhost/management-system-crud-app/api/consult.php", {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
@@ -504,39 +488,63 @@
                 }
             }).then(response => response.json())
             .then(customers => {
-                loadForm(customers[0]);
+                addMultipleCustomersToTable(customers);
             });
         }
 
-        function loadForm(customer) {  // Load customer data to the form to modify it
-            $('#txtName').val(customer.name);
-            $('#txtSurname').val(customer.surname);
-            $('#txtEmail').val(customer.email);
-            $('#txtTelephone').val(customer.telephone);
-            $('#txtDetails').val(customer.details);
-        }
-
-        function editCustomer() { // Send data submitted in the form to the table and hence to the database
-            
-        let id = window.location.href.split("id=")[1];
-        let name = $('#txtName').val();
-        let surname = $('#txtSurname').val();
-        let email = $('#txtEmail').val();
-        let telephone = $('#txtTelephone').val();
-        let details= $('#txtDetails').val();
-
-        fetch(`http://localhost/management-system-crud-app/api/update.php?name=${name}&surname=${surname}&email=${email}&telephone=${telephone}&details=${details}&id=${id}`, {
-            method: "GET",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+        function addMultipleCustomersToTable(customers) {  // Add multiple customers to table
+            for (const customer of customers) {
+                addCustomerToTable(customer);
             }
-        })
-            .then(response => alert("Customer was successfully updated"));
+            $('#customersTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
+        }
+
+        function deleteCustomer(id) {  // Delete customer from table and database
+            const confirmDelete = confirm("Do you want to delete this customer?");
+            if (!confirmDelete) { return; }
+
+
+            fetch(`http://localhost/management-system-crud-app/api/delete.php?id=${id}`, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                }
+            }).then(response => window.location.reload());
+        }
+
+        function editCustomer(id) {  // Edit a customer button that leads to edit-customer page
+            window.location.href= `edit-customer.html?id=${id}`;
         }
 
 
+        function addCustomerToTable(customer) { // Add new customer to the table (only render it, it does not add it to the database)
+            $('#customersTable tbody').append(`
+            <tr>
+                <td>${customer.id}</td>
+                <td>${customer.name} ${customer.surname}</td>
+                <td>${customer.email}</td>
+                <td>${customer.telephone}</td>
+                <td>${customer.details}</td>
+                <td>
+                    <a href="#" onclick="deleteCustomer(${customer.id})" class="btn btn-danger btn-circle btn-sm">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <a href="#" onclick="editCustomer(${customer.id})" class="btn btn-primary btn-circle btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
 
+                </td>
+            </tr>`)
+        }
     </script>
 
 </body>

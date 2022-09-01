@@ -272,8 +272,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -284,8 +283,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -296,8 +294,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -309,7 +306,7 @@
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
+                                            alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div>
@@ -329,8 +326,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -366,16 +362,20 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Customer Management</h1>
 
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
+
                             <a href="create-customer.html" class="btn btn-primary btn-icon-split float-right">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-flag"></i>
                                 </span>
                                 <span class="text">Add Customer</span>
                             </a>
-                            <br /> <br />
+                            <br />
+                            <br />
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="customersTable" width="100%" cellspacing="0">
                                     <thead>
@@ -469,13 +469,18 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+    <!-- Functional scripts -->
+    <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.html5.min.js"></script>
+
     <!-- Add customer to table scripts -->
     <script>
         $(document).ready(function () {
             consultCustomers();
-            // addCustomerToTable("3", "John", "Doe", "jonhdoe@example.com", "+(999)2235959999", "It's Jonh Doe!");
-        })
-
+        });
 
         function consultCustomers() {  // Consult / return customers from the database in JSON format and render it to the table
             fetch("http://localhost/management-system-crud-app/api/consult.php", {
@@ -485,22 +490,29 @@
                     "Content-Type": "application/json"
                 }
             }).then(response => response.json())
-            .then(customers => {
-                addMultipleCustomersToTable(customers);
-            });
+                .then(customers => {
+                    addMultipleCustomersToTable(customers);
+                });
         }
 
         function addMultipleCustomersToTable(customers) {  // Add multiple customers to table
             for (const customer of customers) {
                 addCustomerToTable(customer);
             }
-            $('#customersTable').DataTable();
+            $('#customersTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
         }
 
         function deleteCustomer(id) {  // Delete customer from table and database
-            const confirmDelete = confirm("Do you want to delete this customer?");
+            const confirmDelete = confirm("Do you want to delete this customer?")
             if (!confirmDelete) { return; }
-
 
             fetch(`http://localhost/management-system-crud-app/api/delete.php?id=${id}`, {
                 method: "GET",
@@ -511,14 +523,12 @@
             }).then(response => window.location.reload());
         }
 
-        function editCustomer(id) {
-            window.location.href(`edit-customer.html?id=${id}`);
+        function editCustomer(id) {  // Edit a customer button that leads to edit-customer page
+            window.location.href = `edit-customer.html?id=${id}`;
         }
 
-
-        function addCustomerToTable(customer) { // Add new customer to the table (only render it, it does not add it to the database)s
-            $(document).ready(function () {
-            $('#customersTable tbody').append(`
+        function addCustomerToTable(customer) {  // Add new customer to the table (only render it, it does not add it to the database)
+            $('#customersTable tbody').append(` 
             <tr>
                 <td>${customer.id}</td>
                 <td>${customer.name} ${customer.surname}</td>
@@ -529,14 +539,14 @@
                     <a href="#" onclick="deleteCustomer(${customer.id})" class="btn btn-danger btn-circle btn-sm">
                         <i class="fas fa-trash"></i>
                     </a>
+                    
                     <a href="#" onclick="editCustomer(${customer.id})" class="btn btn-primary btn-circle btn-sm">
                         <i class="fas fa-edit"></i>
                     </a>
-
                 </td>
-            </tr>`)
-            })
+            </tr>`);
         }
+
     </script>
 
 </body>
